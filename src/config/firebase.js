@@ -1,4 +1,5 @@
-import { getAuth,getApps, initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
+import { initializeApp,getApps } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
 apiKey: process.env.REACT_APP_API_KEY,
@@ -9,22 +10,40 @@ apiKey: process.env.REACT_APP_API_KEY,
   appId: process.env.REACT_APP_APP_ID
 };
 
-//const app = getApps
+const app = getApps
 if (!getApps.length) {
 initializeApp(firebaseConfig)
 }
 
 export const createUser = (email,password) => {
   try {
-    const auth = getAuth();
-  auth.createUserWithEmailAndPassword(auth, email, password)
+  const auth = getAuth();
+  createUserWithEmailAndPassword(auth, email, password)
   .then((useCredential) => {
     const user =useCredential.user;
     console.log(user)
     console.log("create user success!!")
     return "success"
   })
-  } catch (error) {
+  } 
+  catch (error) {
+    console.log(error.message)
+    return "failed"
+  }
+}
+
+export const login = (email,password) => {
+  try {
+  const auth = getAuth();
+  signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    const user = userCredential.user;
+    console.log(user)
+    console.log("login success!!")
+    return "success"
+  })
+  } 
+  catch (error) {
     console.log(error.message)
     return "failed"
   }

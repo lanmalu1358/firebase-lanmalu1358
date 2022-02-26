@@ -28,7 +28,7 @@ const CreateUser = () => {
         <TextField id="email" label="email" value={email} onChange={e => setEmail(e.target.value)} /><br/>
         <TextField id="password" label="password" value={password} onChange={e => setPassword(e.target.value)} /><br/>
         <Button variant="outlined" onClick={handleClick}>CREATE</Button><br/>
-        <Link to ='/pages/Login'>戻る</Link>
+        <Link to ='/'>戻る</Link>
         {/* <Link to ='/'>Appへ移動</Link>
         <Link to ='/pages/Main'>Mainへ移動</Link>  */}
     </div>
