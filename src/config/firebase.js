@@ -1,5 +1,6 @@
 import { initializeApp,getApps } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
 apiKey: process.env.REACT_APP_API_KEY,
@@ -15,6 +16,9 @@ if (!getApps.length) {
 initializeApp(firebaseConfig)
 }
 
+const provider = new GoogleAuthProvider();
+provider.addScope('https://mail.google.com/');
+
 export const createUser = (email,password) => {
   try {
   const auth = getAuth();
@@ -27,7 +31,7 @@ export const createUser = (email,password) => {
   })
   } 
   catch (error) {
-    console.log(error.message)
+     console.log(error.message)
     return "failed"
   }
 }
@@ -47,4 +51,33 @@ export const login = (email,password) => {
     console.log(error.message)
     return "failed"
   }
+}
+
+export const firebaseLogin = () => {
+  const auth = getAuth();
+    signInWithPopup(auth, provider)
+    .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // ...
+        console.log(token);
+        console.log(user);
+    }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+        console.log(errorCode);
+        console.log(errorMessage);
+        console.log(email);
+        console.log(credential);
+    });
+
 }

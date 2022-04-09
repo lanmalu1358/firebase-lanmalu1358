@@ -17,7 +17,7 @@ const CreateUser = () => {
         if(result){
             //navigate('/main')
         }else{
-            setError("User作成に失敗しました。")
+            setError("CreateUserに失敗しました。")
         }
     }
     
@@ -29,8 +29,6 @@ const CreateUser = () => {
         <TextField id="password" label="password" value={password} onChange={e => setPassword(e.target.value)} /><br/>
         <Button variant="outlined" onClick={handleClick}>CREATE</Button><br/>
         <Link to ='/'>戻る</Link>
-        {/* <Link to ='/'>Appへ移動</Link>
-        <Link to ='/pages/Main'>Mainへ移動</Link>  */}
     </div>
     )
 }
