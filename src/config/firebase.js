@@ -2,6 +2,8 @@ import { initializeApp,getApps } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
+import { collection, addDoc, getFirestore } from "firebase/firestore";
+
 const firebaseConfig = {
 apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -79,5 +81,24 @@ export const firebaseLogin = () => {
         console.log(email);
         console.log(credential);
     });
+}
 
+export const db =getFirestore();
+
+export const createDataInFirebase =async () => {
+  let returnObj = ""
+  console.log('firebase start')
+    try {
+    const docRef = await addDoc(collection(db, "users"), {
+      first: "AdaAda",
+      last: "Lovelace",
+      born: 1815
+    });
+      returnObj = "test1"
+    console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      returnObj ="test2"
+    console.error("Eroor adding document: ", e);
+    }
+  return returnObj
 }

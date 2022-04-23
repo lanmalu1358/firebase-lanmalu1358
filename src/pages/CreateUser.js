@@ -25,8 +25,8 @@ const CreateUser = () => {
     return(
     <div>
         <a>CreateUser.js</a><br/>
-        <TextField id="email" label="email" value={email} onChange={e => setEmail(e.target.value)} /><br/>
-        <TextField id="password" label="password" value={password} onChange={e => setPassword(e.target.value)} /><br/>
+        <TextField id="standard-basic" label="email" variant="standard"  value={email} onChange={e => setEmail(e.target.value)} /><br/>
+        <TextField id="standard-basic" label="password" variant="standard" value={password} onChange={e => setPassword(e.target.value)} /><br/>
         <Button variant="outlined" onClick={handleClick}>CREATE</Button><br/>
         <Link to ='/'>戻る</Link>
     </div>

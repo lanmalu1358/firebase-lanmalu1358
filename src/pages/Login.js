@@ -21,7 +21,7 @@ const Login = () => {
             const result = await login(email, password)
         console.log("🚀~ file: Login.js ~ line13 ~ handleClick ~ result", result)
         if(result){
-            //navigate('/main')
+            navigate('/pages/main')
         }else{
             setError("Loginに失敗しました。")
         }
@@ -40,7 +40,7 @@ const Login = () => {
     return(
     <div>
         <h1>Login.js</h1><br/>
-        <Link to ='/'>Mainへ移動</Link><br/>
+        <Link to ='/pages/main'>Mainへ移動</Link><br/>
         <TextField id="standard-basic" label="email" variant="standard" value={email} onChange={e => setEmail(e.target.value)} /><br/>
         <TextField id="standard-basic" label="password" variant="standard" value={password} onChange={e => setPassword(e.target.value)} /><br/>
         <Button id="outlined-basic" onClick={handleClick}>LOGIN</Button><br/>
