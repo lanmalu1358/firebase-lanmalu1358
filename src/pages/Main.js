@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {UseHistory} from "react-router-dom"
-import { createDataInFirebase } from '../config/firebase'
+import { createDataInFirebase, readData, updateData, deleteData } from '../config/firebase'
 import Button from '@material-ui/core/Button'
 
 const Main = () => {
@@ -10,11 +10,28 @@ const Main = () => {
         const res =await createDataInFirebase()
         console.log('fin', res)
     }
+
+    const read = async () => {
+        console.log("read")
+        await readData()
+    }
+
+    const handleUpdate = async () => {
+        await updateData();
+    }
+
+    const handleDelete = async () => {
+        await deleteData();
+    }
+
     return(
     <div>
     <h1>Main.js</h1><br/>
 
     <Button onClick={createFunc}>DBへ保存</Button><br/>
+    <Button onClick={read}>DB読み取り</Button><br/>
+    <Button variant="outlined" onClick={handleUpdate}>Update</Button><br/>
+    <Button variant="outlined" onClick={handleDelete}>Delete</Button><br/>
 
     <Link to = '/'>Loginへ移動</Link><br/>
     <Link to ='/pages/CreateUser'>CreateUserへ移動</Link>

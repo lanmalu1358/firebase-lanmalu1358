@@ -15,7 +15,7 @@ const CreateUser = () => {
         const result = await createUser(email, password)
         console.log("🚀~ file: CreateUser.js ~ line13 ~ handleClick ~ result", result)
         if(result){
-            //navigate('/main')
+            navigate('/pages/main')
         }else{
             setError("CreateUserに失敗しました。")
         }

@@ -2,7 +2,8 @@ import { initializeApp,getApps } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
-import { collection, addDoc, getFirestore } from "firebase/firestore";
+import { collection, addDoc, getFirestore, query, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
+
 
 const firebaseConfig = {
 apiKey: process.env.REACT_APP_API_KEY,
@@ -88,6 +89,7 @@ export const db =getFirestore();
 export const createDataInFirebase =async () => {
   let returnObj = ""
   console.log('firebase start')
+
     try {
     const docRef = await addDoc(collection(db, "users"), {
       first: "AdaAda",
@@ -102,3 +104,38 @@ export const createDataInFirebase =async () => {
     }
   return returnObj
 }
+
+export const readData = async () => {
+  console.log('readData')
+  const q =query(collection(db,"users"));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    console.log(doc.id," => ",doc.data());
+  });
+};
+
+export const updateData = async () => {
+  try{
+    console.log("update start")
+    const washingtonRef = doc(db, "users", "ByPtoIrajShBxIsgpsn1");
+  await updateDoc(washingtonRef, {
+    capital: true
+  });
+  }catch(err){
+    console.log(err)
+  };
+  //await deleteDoc(doc(db, "cities", "DC"));  
+};
+
+
+export const deleteData = async () => {
+  const docRef = doc(db, "users", "azZ1I49HXf0rQdMv1cGv")
+
+  await deleteDoc(docRef)
+};
+
+
+// const querySnapshot = await getDocs(collection(db, "users"));
+// querySnapshot.forEach((doc) => {
+//   console.log(`${doc.id} => ${doc.data()}`);
+// });
