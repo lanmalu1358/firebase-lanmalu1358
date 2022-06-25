@@ -2,7 +2,7 @@ import { initializeApp,getApps } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
-import { collection, addDoc, getFirestore, query, getDocs, updateDoc, doc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, getFirestore, query, getDocs, getDoc, updateDoc, doc, deleteDoc, setDoc } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -129,13 +129,18 @@ export const updateData = async () => {
 
 
 export const deleteData = async () => {
-  const docRef = doc(db, "users", "azZ1I49HXf0rQdMv1cGv")
+  const docRef = doc(db, "users", "ByPtoIrajShBxIsgpsn1")
 
   await deleteDoc(docRef)
 };
 
 
-// const querySnapshot = await getDocs(collection(db, "users"));
-// querySnapshot.forEach((doc) => {
-//   console.log(`${doc.id} => ${doc.data()}`);
-// });
+export const addData = async (first,last,born) => {
+const docRef = await addDoc(collection(db, "users"), {
+  first,
+  last,
+  born
+});
+console.log("Document written with ID: ", docRef.id);
+
+}; 
